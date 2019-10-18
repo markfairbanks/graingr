@@ -1,0 +1,26 @@
+Package: graingr
+Title: Helper functions for Chicagoans
+Version: 0.0.2
+Authors@R: 
+    person(given = "Mark",
+           family = "Fairbanks",
+           role = c("aut", "cre"),
+           email = "mark.t.fairbanks@gmail.com")
+Description: Helper functions for Grainger Employees
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
+Imports: 
+    dplyr,
+    MLmetrics,
+    utils,
+    rlang,
+    tibble,
+    odbc,
+    stringr,
+    purrr,
+    lubridate,
+    magrittr
+URL: https://github.com/mtfairbanks/graingr
+BugReports: https://github.com/mtfairbanks/graingr/issues

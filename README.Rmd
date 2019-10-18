@@ -1,0 +1,126 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+<img src="man/figures/logo.jpg" align="right" />
+
+# graingr
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+Helper functions for Chicagoans.
+
+## Installation
+
+You can install the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("mtfairbanks/graingr")
+```
+
+## Fiscper functions
+
+* The `fiscper_*()` family of functions allows for extracting date information from a fiscper column.
+* `fiscper_workdays()` allows you to add the number of sales days in a given fiscper.
+* `make_fiscper()` allows you to create a fiscper column from year and month columns.
+
+```{r echo=F}
+example_csv <- "C:/Users/xmxf129/Documents/example_data.csv"
+```
+
+```{r}
+library(pacman)
+p_load(tidyverse, graingr)
+
+finance_df <- read_csv(example_csv, col_types = cols())
+
+# Extract info from fiscper
+finance_df <- finance_df %>%
+  mutate(year = fiscper_year(fiscper),
+         month = fiscper_month(fiscper),
+         quarter = fiscper_quarter(fiscper),
+         semester = fiscper_semester(fiscper),
+         work_days = fiscper_workdays(fiscper),
+         date = fiscper_date(fiscper))
+
+head(finance_df)
+```
+
+```{r}
+# Create fiscper from year & month columns
+finance_df %>%
+  select(year, month, revenue, cost) %>%
+  mutate(fiscper_example = make_fiscper(year, month)) %>%
+  head()
+```
+
+## Querying Temp Tables
+
+Querying temp tables in R is a two step process:
+
+1) "Send" temp tables to SQL
+2) Query from the temp tables
+
+The `send_temp()` function will help with the first step.
+
+Note that `COLLECT STATS` cannot be used when sending temp tables from R. (If you don't know what this means, do not worry. It simply means this issue doesn't apply to you.)
+
+Also note that semi-colons must only be placed after `ON COMMIT PRESERVE ROWS`. See the below example as a reference for how to format your temp tables.
+
+```{r eval=F}
+library(pacman)
+p_load(tidyverse, graingr, odbc)
+
+# Establish connection to teradata
+td_con <- odbc::dbConnect(odbc::odbc(), "driver_name")
+
+# Temp query
+temp_query <- "CREATE VOLATILE MULTISET TABLE origination_df AS (
+  SELECT top 100 *
+  FROM DLFIN_FA.monthly_sales_t
+  )
+WITH DATA PRIMARY INDEX(level_1, level_2, level_3, fiscper) ON  COMMIT  PRESERVE ROWS;
+
+---- Fulfillment data
+CREATE VOLATILE MULTISET TABLE fulfillment_df AS (
+  SELECT top 100 *
+  FROM DLFIN_FA.monthly_sales_t
+  )
+WITH DATA PRIMARY INDEX(level_1, level_2, level_3, fiscper) ON  COMMIT  PRESERVE ROWS;"
+
+# Send the temp queries
+send_temp(td_con, temp_query)
+
+# Run final query
+final_query <- "select top 100 * from origination_df"
+sales_df <- odbc::dbGetQuery(td_con, final_query) %>% as_tibble()
+```
+
+## Class Accuracy
+
+Find accuracy measures for classification models:
+
+```{r class_accuracy}
+library(pacman)
+p_load(tidyverse, graingr)
+
+fake_df <- tibble(actuals = c(0,1,1,1,0,1),
+                  rf_pred = c(1,1,1,1,0,0))
+                  
+fake_df %>%
+  class_accuracy(truth = actuals, pred = rf_pred)
+```
+
