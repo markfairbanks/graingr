@@ -1,1 +1,3 @@
-inv_gc <- function() {invisible(gc())}
+inv_gc <- function() {
+  invisible(gc())
+}
