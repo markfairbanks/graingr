@@ -2,7 +2,7 @@
 % Please edit documentation in R/send_temp_mac.R
 \name{send_temp_mac}
 \alias{send_temp_mac}
-\title{Send Temp Queries on Mac}
+\title{Send Temp Queries with Mac}
 \usage{
 send_temp_mac(teradata_connection, temp_query)
 }
