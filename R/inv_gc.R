@@ -1,7 +1,8 @@
 #' Run invisible garbage collection
 #'
-#' Run garbage collection without the typical output.
-#' Run gc in the middle of a long pipe chain
+#' Run garbage collection without the gc() output.
+#'
+#' Run gc in the middle of a long pipe chain. Useful for large datasets
 #'
 #' @return
 #' @export

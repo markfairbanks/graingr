@@ -7,8 +7,10 @@
 inv_gc(df = NULL)
 }
 \description{
-Run garbage collection without the typical output.
-Run gc in the middle of a long pipe chain
+Run garbage collection without the gc() output.
+}
+\details{
+Run gc in the middle of a long pipe chain. Useful for large datasets
 }
 \examples{
 inv_gc()
