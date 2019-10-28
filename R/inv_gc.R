@@ -1,12 +1,22 @@
 #' Run invisible garbage collection
 #'
 #' Run garbage collection without the typical output.
+#' Run gc in the middle of a long pipe chain
 #'
 #' @return
 #' @export
 #'
 #' @examples
 #' inv_gc()
-inv_gc <- function() {
-  invisible(gc())
+#'
+#' df %>%
+#'   inv_gc() %>%
+#'   select(col1, col2)
+inv_gc <- function(df = NULL) {
+  if(is.null(df)) {
+    invisible(gc())
+  } else {
+    invisible(gc())
+    return(df)
+  }
 }

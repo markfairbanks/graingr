@@ -3,7 +3,6 @@
 export("%>%")
 export("%notin%")
 export(class_accuracy)
-export(df_gc)
 export(fiscper_date)
 export(fiscper_month)
 export(fiscper_quarter)

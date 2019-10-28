@@ -4,11 +4,16 @@
 \alias{inv_gc}
 \title{Run invisible garbage collection}
 \usage{
-inv_gc()
+inv_gc(df = NULL)
 }
 \description{
 Run garbage collection without the typical output.
+Run gc in the middle of a long pipe chain
 }
 \examples{
 inv_gc()
+
+df \%>\%
+  inv_gc() \%>\%
+  select(col1, col2)
 }
