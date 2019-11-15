@@ -9,6 +9,9 @@ fiscper_year(fiscper)
 \arguments{
 \item{fiscper}{Column containing the fiscper}
 }
+\value{
+
+}
 \description{
 Extract info from fiscper
 }

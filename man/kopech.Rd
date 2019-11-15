@@ -6,6 +6,9 @@
 \usage{
 kopech()
 }
+\value{
+
+}
 \description{
 Job: Grand Poobah \cr
 Interests: Data Analytics. Solves mysteries in his spare time.

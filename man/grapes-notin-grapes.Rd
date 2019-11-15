@@ -11,6 +11,9 @@ x \%notin\% y
 
 \item{y}{vector or NULL}
 }
+\value{
+
+}
 \description{
 notin operator
 }

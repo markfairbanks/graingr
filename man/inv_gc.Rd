@@ -6,6 +6,9 @@
 \usage{
 inv_gc(df = NULL)
 }
+\value{
+
+}
 \description{
 Run garbage collection without the gc() output. Can also be run in the middle of a long pipe chain. Useful for large datasets.
 }

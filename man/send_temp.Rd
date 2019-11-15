@@ -11,10 +11,13 @@ send_temp(teradata_connection, temp_query)
 
 \item{query}{A string containing one or multiple temp queries}
 }
+\value{
+
+}
 \description{
 Used to run temp table aka "volatile table" queries from R. \cr
-Step 1: Use send_temp() to send temp queries to teradata. \cr
-Step 2: Query your temp table(s) using odbc::dbGetQuery() as normal.
+Step 1: Use `send_temp()` to send temp queries to teradata. \cr
+Step 2: Query your temp table(s) using `odbc::dbGetQuery()` as normal.
 }
 \examples{
 # Establish connection to teradata

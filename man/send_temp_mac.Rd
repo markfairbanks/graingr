@@ -11,6 +11,9 @@ send_temp_mac(teradata_connection, temp_query)
 
 \item{query}{A string containing one or multiple temp queries}
 }
+\value{
+
+}
 \description{
 Used to run temp table aka "volatile table" queries from R. \cr
 Step 1: Use send_temp_mac() to send temp queries to teradata. \cr

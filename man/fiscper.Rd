@@ -24,6 +24,9 @@ make_fiscper(year, month)
 \arguments{
 \item{fiscper}{Column containing the fiscper}
 }
+\value{
+
+}
 \description{
 Extract info from fiscper
 }
